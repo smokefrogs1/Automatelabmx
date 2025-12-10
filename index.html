@@ -1,3 +1,5 @@
+Código 10 diciembre original
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,15 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutomateLabMX | Puebla</title>
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: http: data: blob:;">
-
-    
     <link rel="icon" type="image/png" href="logo-automata.png"> 
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.6/build/spline-viewer.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
     
     <style>
         /* --- TEMAS DE COLOR --- */
@@ -22,35 +20,35 @@
             --bg-color: #050505;
             --bg-rgb: 5, 5, 5;
             
-            --primary: #00e6d6; /* Cian Neón (Texto, bordes) */
-            --primary-rgb: 0, 230, 214;
+            --primary: #00f2ea; /* Cian Neón (Texto, bordes) */
+            --primary-rgb: 0, 242, 234;
             
-            --secondary: #ff2e6a; /* Rosa Neón (Botones CTA, Destacados) */
-            --secondary-rgb: 0, 230, 214;
+            --secondary: #ff0050; /* Rojo/Rosa Neón (Botones CTA, Destacados) */
+            --secondary-rgb: 255, 0, 80;
             
-            --accent: #8a2cff; /* Morado Neon (Detalles) */
-            --accent-rgb: 138, 44, 255; 
-            --glass: rgba(255, 255, 255, 0.04);
-            --text: #f5f5f5;
-            --text-subtle: #9e9e9e;
+            --accent: #7000ff; /* Morado (Detalles) */
+            --accent-rgb: 112, 0, 255; 
+            --glass: rgba(255, 255, 255, 0.05);
+            --text: #ffffff;
+            --text-subtle: #aaaaaa;
         }
 
         /* MODO CLARO */
         .light-theme {
-            --bg-color: #f9f9fb;
-            --bg-rgb: 249, 249, 251;
+            --bg-color: #ffffff;
+            --bg-rgb: 255, 255, 255;
             
-            --primary: #009b91; 
-            --primary-rgb: 0, 155, 145;
+            --primary: #008880; 
+            --primary-rgb: 0, 136, 128;
             
-            --secondary: #ff4a84;
-            --secondary-rgb: 255, 74, 132;
+            --secondary: #ff3870;
+            --secondary-rgb: 255, 56, 112;
             
-            --accent: #346dff;
-            --accent-rgb: 52, 109, 255; 
-            --glass: rgba(0, 0, 0, 0.06);
-            --text: #0a0a0a;
-            --text-subtle: #555555;
+            --accent: #0056e0;
+            --accent-rgb: 0, 86, 224; 
+            --glass: rgba(0, 0, 0, 0.05);
+            --text: #050505;
+            --text-subtle: #444444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -116,6 +114,18 @@
         nav ul { display: flex; list-style: none; gap: 30px; }
         nav a { text-decoration: none; color: var(--text); font-weight: 500; transition: 0.3s; }
         
+        .menu-toggle-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primary);
+            cursor: pointer;
+            line-height: 1;
+            padding: 5px;
+            display: none;
+            z-index: 101;
+        }
+        
         .theme-toggle {
             background: none;
             border: none;
@@ -134,7 +144,6 @@
             transition: text-shadow 0.3s ease, color 0.3s ease;
         }
 
-        /* EFECTO HOVER PARA ESCRITORIO (Mouse) */
         @media (min-width: 769px) {
             h1:hover, h2:hover, h3:hover, p:hover, a:hover, li:hover, span:hover, i:hover, .logo:hover {
                 text-shadow: 0 0 8px var(--primary), 
@@ -142,17 +151,16 @@
             }
         }
 
-        /* CLASE PARA EFECTO TOUCH EN MÓVIL (Se activa con JS) */
         .touch-glow {
             text-shadow: 0 0 8px var(--primary), 
                          0 0 20px rgba(var(--primary-rgb), 0.8) !important;
         }
 
-        /* --- NUEVO: BOTÓN CTA DESTACADO (PULSE) --- */
+        /* --- BOTÓN CTA DESTACADO (PULSE) --- */
         .btn-cta-pulse {
             padding: 15px 45px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent)); /* Gradiente Rojo-Morado */
-            color: #ffffff !important; /* Texto blanco siempre */
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: #ffffff !important;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -188,16 +196,8 @@
             position: relative;
         }
 
-        .hero-text {
-            width: 50%;
-            z-index: 10;
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
+        .hero-text { width: 50%; z-index: 10; }
+        .hero-text h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
         .hero-text span { color: var(--primary); }
 
         .hero-text p {
@@ -207,56 +207,18 @@
             max-width: 500px;
         }
 
-        /* El botón neón antiguo (opcional, si quieres usarlo en lugares secundarios) */
-        .btn-neon {
-            padding: 15px 40px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.4s;
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            text-decoration: none;
-        }
-        .btn-neon:hover {
-            background: var(--primary);
-            color: var(--bg-color);
-            box-shadow: 0 0 20px var(--primary);
-            text-shadow: none;
-        }
-
         .hero-image-2d {
-          position: absolute; 
-          right: 0; 
-          top: 0; 
-          width: 50%; 
-          height: 100%; 
-          z-index: 1;
-          overflow: hidden; 
-          display: flex; 
-          align-items: center; 
-          justify-content: flex-end;
-          pointer-events: auto;
-          /* Mezclar con el fondo de la página */
-          mix-blend-mode: screen; /* o 'lighten', 'overlay', 'soft-light' */
+            position: absolute; right: 0; top: 0; width: 50%; height: 100%; z-index: 1;
+            overflow: hidden; display: flex; align-items: center; justify-content: flex-end; pointer-events: none;
         }
-        
-        .hero-image-2d spline-viewer {
-          width: 100%;
-          height: 100%;
-          border: none;
-          background: transparent !important;
-          /* Forzar transparencia */
-          opacity: 0.95;
+        .hero-image-2d img {
+            width: 100%; height: 100%; object-fit: cover; object-position: right center;
+            animation: float 4s ease-in-out infinite;
         }
-        
-        /* Canvas de Spline transparente */
-        .hero-image-2d spline-viewer canvas {
-          background: transparent !important;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
 
         /* --- CINTA DE TECNOLOGÍAS (MARQUEE) --- */
@@ -301,9 +263,7 @@
             color: var(--primary); 
         }
 
-        .tech-marquee:hover .marquee-content {
-            animation-play-state: paused;
-        }
+        .tech-marquee:hover .marquee-content { animation-play-state: paused; }
 
         .tech-group span:hover {
             color: var(--text);
@@ -322,7 +282,6 @@
         .services { padding: 100px 50px; text-align: center; }
         .section-title { font-size: 2.5rem; margin-bottom: 60px; display: inline-block; border-bottom: 3px solid var(--secondary); }
         
-        /* --- Estilo para la nueva tarjeta de Resumen de Agencia --- */
         .agency-summary-card {
             max-width: 900px; 
             margin: 0 auto 50px auto; 
@@ -335,17 +294,8 @@
             transform: translateY(-20px); 
         }
 
-        .agency-summary-card h3 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .agency-summary-card p {
-            font-size: 1.1rem;
-            color: var(--text);
-            line-height: 1.6;
-        }
+        .agency-summary-card h3 { font-size: 1.8rem; color: var(--primary); margin-bottom: 10px; }
+        .agency-summary-card p { font-size: 1.1rem; color: var(--text); line-height: 1.6; }
 
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .card {
@@ -397,11 +347,7 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        .input-panel {
-            flex: 1;
-            padding: 40px;
-            text-align: left;
-        }
+        .input-panel { flex: 1; padding: 40px; text-align: left; }
         .results-panel {
             flex: 1;
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -415,96 +361,44 @@
         }
         .results-panel::before {
             content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background: url("https://i.ibb.co/VYQyQ2KT/Imagen-generada-Gemini.png") no-repeat center center;
-            background-size: cover;
-            opacity: 0.1;
-            z-index: 1;
+            background-size: cover; opacity: 0.1; z-index: 1;
         }
         .results-panel * { position: relative; z-index: 2; }
 
-        .input-group {
-            margin-bottom: 25px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--primary);
-        }
+        .input-group { margin-bottom: 25px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--primary); }
+        
         .input-group input, .input-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--text-subtle);
-            border-radius: 8px;
-            background: var(--glass);
-            color: var(--text);
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            width: 100%; padding: 12px; border: 1px solid var(--text-subtle); border-radius: 8px;
+            background: var(--glass); color: var(--text); font-family: 'Outfit', sans-serif; 
+            font-size: 1rem; transition: border-color 0.3s;
         }
+        
         .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 5px var(--secondary); }
 
-        .result-value {
-            font-size: 3.5rem;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin-top: 10px;
-        }
-        .result-label {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
-        .disclaimer {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 20px;
-        }
-        /* --- FIN CALCULADORA DE AHORRO --- */
+        .result-value { font-size: 3.5rem; font-weight: 700; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-top: 10px; }
+        .result-label { font-size: 1.2rem; margin-bottom: 15px; }
+        .disclaimer { font-size: 0.8rem; color: rgba(255, 255, 255, 0.7); margin-top: 20px; }
 
         /* --- NUEVO: CTA INTERSTICIAL (SECCIÓN EXTRA) --- */
-        .cta-interstitial {
-            text-align: center;
-            padding: 60px 20px;
-            background: var(--glass);
-            margin: 40px 0;
-        }
+        .cta-interstitial { text-align: center; padding: 60px 20px; background: var(--glass); margin: 40px 0; }
 
         /* --- FORMULARIO DE CONTACTO (NUEVO) --- */
-        .contact-form-section {
-            padding: 80px 50px;
-            text-align: center;
-        }
+        .contact-form-section { padding: 80px 50px; text-align: center; }
         .contact-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--glass);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(var(--primary-rgb), 0.3);
+            max-width: 600px; margin: 0 auto; background: var(--glass);
+            padding: 40px; border-radius: 20px; border: 1px solid rgba(var(--primary-rgb), 0.3);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
-        .contact-container textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
+        .contact-container textarea { resize: vertical; min-height: 100px; }
         .form-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
+            width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--accent));
+            border: none; border-radius: 8px; color: white; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; transition: 0.3s; margin-top: 10px;
         }
-        .form-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.4);
-        }
+        .form-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.4); }
 
 
         /* --- Portafolio --- */
@@ -528,6 +422,194 @@
         .footer-col p { color: var(--text-subtle); margin-bottom: 10px; }
         .socials a { color: var(--text); font-size: 1.5rem; margin-right: 15px; transition: 0.3s; }
 
+        /* --- Botones Flotantes (WhatsApp y Chatbot) --- */
+        .whatsapp-float, .chatbot-float {
+            position: fixed; 
+            bottom: 30px;
+            background-color: var(--secondary);
+            color: white; 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%;
+            text-align: center; 
+            font-size: 35px; 
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.5); 
+            z-index: 200;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            text-decoration: none; 
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float {
+            right: 30px; 
+            background-color: #25d366;
+            animation: pulse 2s infinite; 
+        }
+
+        .chatbot-float {
+            left: 30px;
+            background-color: var(--accent); 
+            font-size: 30px;
+            animation: chat-bounce 3s infinite;
+            cursor: pointer; 
+        }
+        
+        .whatsapp-float:hover, .chatbot-float:hover {
+             transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        @keyframes chat-bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* --- NUEVO: ESTILOS DEL WIDGET DE CHAT (VENTANA) --- */
+        #chat-widget-container {
+            position: fixed;
+            bottom: 100px; 
+            left: 30px;
+            width: 350px;
+            height: 450px;
+            background: var(--bg-color);
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            z-index: 199;
+            display: flex;
+            flex-direction: column;
+            
+            /* OCULTAR POR DEFECTO */
+            transform: translateY(100%) scale(0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s, visibility 0.4s;
+            border: 1px solid var(--primary);
+        }
+
+        #chat-widget-container.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chat-header {
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            color: white;
+            padding: 15px 20px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h4 { margin: 0; font-size: 1.1rem; }
+        
+        .chat-close-btn { 
+            background: none; border: none; color: white; 
+            font-size: 1.5rem; cursor: pointer; transition: 0.2s; 
+        }
+        .chat-close-btn:hover { color: var(--secondary); }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-left: 1px solid var(--glass);
+            border-right: 1px solid var(--glass);
+        }
+        
+        /* Estilos base de mensaje */
+        .message {
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        /* --- NUEVO: ESTILOS DE MENSAJES Y INDICADOR DE ESCRITURA --- */
+        .message.bot-response {
+            background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.1), rgba(var(--accent-rgb), 0.1));
+            color: var(--text);
+            margin-right: 30%;
+            text-align: left;
+            border: 1px solid rgba(var(--primary-rgb), 0.3);
+        }
+
+        .message.user-message {
+            background: var(--glass);
+            color: var(--text);
+            margin-left: 30%;
+            text-align: left; /* Se deja a la izquierda para mejor lectura, pero se alinea a la derecha con margen */
+            border: 1px solid rgba(var(--primary-rgb), 0.1);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 30px;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            margin: 0 4px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: typing 1.5s infinite;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.5); opacity: 0; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .chat-input {
+            padding: 10px;
+            border-top: 1px solid var(--glass);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            display: flex;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            background: var(--glass);
+            color: var(--text);
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .chat-input button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .chat-input button:hover:not(:disabled) { background: var(--secondary); }
+        /* --- FIN ESTILOS DEL WIDGET --- */
+
+
         /* --- Cursor y Móvil --- */
         .cursor-dot, .cursor-circle {
             z-index: 99999; pointer-events: none; position: fixed;
@@ -543,26 +625,32 @@
             width: 50px; height: 50px; border-color: var(--secondary);
             background: rgba(var(--secondary-rgb), 0.2);
         }
-        .whatsapp-float {
-            position: fixed; bottom: 30px; right: 30px;
-            background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%;
-            text-align: center; font-size: 35px; box-shadow: 2px 2px 15px rgba(0,0,0,0.5); z-index: 200;
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; animation: pulse 2s infinite;
-        }
+        
         body:not(a):not(button):not(input):not(textarea) { cursor: none; }
 
         @media (max-width: 768px) {
             header { padding: 15px 20px; }
-            .hero { flex-direction: column; justify-content: center; text-align: center; }
+            .hero { flex-direction: column; justify-content: center; text-align: center; padding: 0 20px; }
             .hero-text { width: 100%; padding-top: 100px; }
-            .hero-image-2d { 
-              position: relative; 
-              width: 100%; 
-              height: 400px; /* Aumentado para móvil */
-              margin-top: 40px; 
-              justify-content: center; 
-            nav ul { display: none; } 
+            .hero-image-2d { position: relative; width: 100%; height: 300px; margin-top: 40px; justify-content: center; }
+            .hero-image-2d img { object-position: center center; }
+            
+            /* --- NAVEGACIÓN MÓVIL --- */
+            .menu-toggle-btn { display: block; order: -1; margin-right: 10px; }
+            nav ul { 
+                position: fixed; top: 60px; left: 0; width: 100%; height: auto;
+                flex-direction: column; background: rgba(var(--bg-rgb), 0.95);
+                backdrop-filter: blur(8px); box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                padding: 20px 0; z-index: 99;
+                transform: translateY(-100%); visibility: hidden; 
+                transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+                display: flex;
+            }
+            nav ul.active { transform: translateY(0); visibility: visible; }
+            nav ul li { width: 100%; text-align: center; border-bottom: 1px solid rgba(var(--primary-rgb), 0.1); }
+            nav ul li:last-child { border-bottom: none; }
+            nav ul a { padding: 15px; display: block; } 
+
             .logo { font-size: 1.2rem; }
             .hero-text h1 { font-size: 2.5rem; }
             .cursor-dot, .cursor-circle { display: none; }
@@ -579,8 +667,28 @@
             .value-prop { padding: 50px 20px; }
             
             .contact-container { padding: 25px; margin: 0 20px; }
+            
+            /* Ajuste de los botones flotantes en móvil para que no choquen */
+            .whatsapp-float, .chatbot-float {
+                width: 50px; height: 50px; font-size: 25px; bottom: 20px;
+            }
+            .whatsapp-float { right: 20px; }
+            .chatbot-float { left: 20px; }
+
+            /* Ajuste del widget de chat en móvil */
+            #chat-widget-container {
+                width: 90%; 
+                height: 80vh; 
+                left: 5%; 
+                bottom: 80px; 
+            }
+
+            /* Ajuste de mensajes en móvil */
+            .message.bot-response { margin-right: 10%; }
+            .message.user-message { margin-left: 10%; }
         }
     </style>
+</head>
 <body>
     
     <div class="neural-net-bg"></div>
@@ -591,7 +699,7 @@
     <header>
         <div class="logo">AUTOMATELABMX PUEBLA</div>
         <nav>
-            <ul>
+            <ul id="main-nav">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#valor">Valor</a></li>
@@ -599,6 +707,9 @@
                 <li><a href="#proyectos">Proyectos</a></li>
                 <li><a href="#contacto-form">Contacto</a></li>
             </ul>
+            <button class="theme-toggle menu-toggle-btn" id="menu-toggle-btn" aria-label="Abrir menú de navegación">
+                <i class="ri-menu-line"></i>
+            </button>
             <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema día/noche">
                 <i class="ri-moon-fill" id="theme-icon"></i>
             </button>
@@ -613,7 +724,7 @@
         </div>
         
         <div class="hero-image-2d" data-aos="fade-left">
-            <spline-viewer url="https://prod.spline.design/vrOctc06upWAu8JN/scene.splinecode"></spline-viewer>
+            <img src="https://i.ibb.co/VYQyQ2KT/Imagen-generada-Gemini.png" alt="Automatización de Negocios">
         </div>
     </section>
 
@@ -623,8 +734,10 @@
                 <span><i class="ri-google-fill"></i> Google Cloud</span>
                 <span><i class="ri-meta-fill"></i> Meta Ads</span>
                 <span><i class="ri-chat-1-fill"></i> Telegram</span>
+                <span><i class="ri-open-source-line"></i> n8n</span>
                 <span><i class="ri-ai-fill"></i> Claude AI</span>
                 <span><i class="ri-file-text-fill"></i> Notion</span>
+                <span><i class="ri-stack-line"></i> Make</span>
                 <span><i class="ri-openai-fill"></i> OpenAI</span>
                 <span><i class="ri-whatsapp-fill"></i> WhatsApp API</span>
                 <span><i class="ri-robot-2-fill"></i> Gemini</span>
@@ -633,8 +746,10 @@
                 <span><i class="ri-google-fill"></i> Google Cloud</span>
                 <span><i class="ri-meta-fill"></i> Meta Ads</span>
                 <span><i class="ri-chat-1-fill"></i> Telegram</span>
+                <span><i class="ri-open-source-line"></i> n8n</span>
                 <span><i class="ri-ai-fill"></i> Claude AI</span>
                 <span><i class="ri-file-text-fill"></i> Notion</span>
+                <span><i class="ri-stack-line"></i> Make</span>
                 <span><i class="ri-openai-fill"></i> OpenAI</span>
                 <span><i class="ri-whatsapp-fill"></i> WhatsApp API</span>
                 <span><i class="ri-robot-2-fill"></i> Gemini</span>
@@ -684,10 +799,10 @@
             </div>
             <div class="value-card" data-aos="fade-up" data-aos-delay="200">
                 <h3>2. ¿Qué hace nuestro equipo?</h3>
-                <p>Somos experto en diseño de flujos de trabajo e integración. Nuestra labor no es solo instalar un software, sino diseñar el cerebro de tu operación digital:</p>
+                <p>Somos arquitectos de flujos de trabajo e ingenieros de integración. Nuestra labor no es solo instalar un software, sino diseñar el cerebro de tu operación digital:</p>
                 <ul>
                     <li><i class="ri-code-s-slash-line"></i> Auditoría y diseño de procesos (Mapeo de tareas).</li>
-                    <li><i class="ri-settings-4-line"></i> Implementación de flujos en plataformas No-Code/Low-Code.</li>
+                    <li><i class="ri-settings-4-line"></i> Implementación de flujos en plataformas No-Code/Low-Code (Make, n8n).</li>
                     <li><i class="ri-brain-line"></i> Integración de modelos de IA (Gemini, OpenAI) en tu comunicación.</li>
                     <li><i class="ri-shield-check-line"></i> Mantenimiento y optimización de flujos para máxima eficiencia.</li>
                 </ul>
@@ -696,10 +811,10 @@
                 <h3>3. Ventajas de contratarnos</h3>
                 <p>Al elegir AutomateLabMx, obtienes más que solo bots; inviertes en una operación escalable y sin errores humanos:</p>
                 <ul>
-                    <li><i class="ri-timer-2-line"></i> Ahorro de Tiempo: Libera hasta el 80% del tiempo de tu equipo de ventas y soporte.</li>
-                    <li><i class="ri-line-chart-line"></i> Mayor Crecimiento: Procesos más rápidos significan más leads convertidos y mayor volumen de negocio.</li>
-                    <li><i class="ri-wallet-3-line"></i> Reducción de Costos: Disminuye la necesidad de contratar personal para tareas repetitivas.</li>
-                    <li><i class="ri-error-warning-line"></i> Cero Errores: La máquina nunca olvida ni se cansa, garantizando precisión.</li>
+                    <li><i class="ri-timer-2-line"></i> **Ahorro de Tiempo:** Libera hasta el 80% del tiempo de tu equipo de ventas y soporte.</li>
+                    <li><i class="ri-line-chart-line"></i> **Mayor Crecimiento:** Procesos más rápidos significan más leads convertidos y mayor volumen de negocio.</li>
+                    <li><i class="ri-wallet-3-line"></i> **Reducción de Costos:** Disminuye la necesidad de contratar personal para tareas repetitivas.</li>
+                    <li><i class="ri-error-warning-line"></i> **Cero Errores:** La máquina nunca olvida ni se cansa, garantizando precisión.</li>
                 </ul>
             </div>
         </div>
@@ -717,7 +832,7 @@
                 <p class="text-subtle">Estima cuánto podrías ahorrar al mes optimizando tus tareas.</p>
 
                 <div class="input-group">
-                    <label for="tareas">Tareas manuales diarias (e.g., responder mensajes, actualizar leads, emails, etc.)</label>
+                    <label for="tareas">Tareas manuales diarias (e.g., responder mensajes, actualizar leads, agendar citas, enviar emails)</label>
                     <input type="number" id="tareas" value="100" min="0">
                 </div>
                 
@@ -735,7 +850,7 @@
                 <i class="ri-money-dollar-circle-line" style="font-size: 5rem; margin-bottom: 20px;"></i>
                 <div class="result-label">Ahorro Mensual Estimado</div>
                 <div class="result-value" id="ahorro-mensual">$0.00 MXN</div>
-                <a href="#contacto-form" class="btn-cta-pulse" style="font-size: 1rem; padding: 12px 30px; margin-top: 20px; box-shadow: none; border: 2px solid white;">¡Quiero ese Ahorro!</a>
+                <a href="#contacto-form" class="btn-cta-pulse" style="font-size: 1rem; padding: 12px 30px; margin-top: 20px; box-shadow: none; border: 2px solid white;">¡Quiero este Ahorro!</a>
                 <div class="disclaimer">
                     *Estimación basada en 20 días laborales. No es un valor garantizado.
                 </div>
@@ -748,7 +863,7 @@
             <div class="portfolio-overlay">
                 <div>
                     <h3>Dashboard Procesos</h3>
-                    <p>Automatización de Procesos en tu negocio</p>
+                    <p>Automatización de Procesos en Puebla</p>
                 </div>
             </div>
         </div>
@@ -783,7 +898,7 @@
                 
                 <div class="input-group">
                     <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                    <input type="email" id="email" name="email" placeholder="ejemplo@empresa.com" required>
                 </div>
 
                 <div class="input-group">
@@ -793,7 +908,7 @@
 
                 <div class="input-group">
                     <label for="mensaje">¿Cómo podemos ayudarte?</label>
-                    <textarea id="mensaje" name="mensaje" placeholder="Quiero automatizar mi negocio..." required></textarea>
+                    <textarea id="mensaje" name="mensaje" placeholder="Me gustaría automatizar..." required></textarea>
                 </div>
 
                 <button type="submit" class="form-btn">Enviar Mensaje <i class="ri-send-plane-fill"></i></button>
@@ -822,7 +937,26 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/522222930938?text=Hola,%20me%20interesa%20automatizar%20mi%20negocio" class="whatsapp-float" target="_blank">
+    <div id="chat-widget-container">
+        <div class="chat-header">
+            <h4>Asistente IA de AutomateLab</h4>
+            <button class="chat-close-btn" id="close-chat-btn" aria-label="Cerrar chat">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-response">Hola! Soy su asistente de IA. ¿En qué puedo ayudarle a automatizar su negocio hoy?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Escribe tu pregunta..." id="chat-input-field">
+            <button id="send-chat-btn"><i class="ri-send-plane-2-line"></i></button>
+        </div>
+    </div>
+    <button class="chatbot-float" id="open-chat-btn" aria-label="Abrir chatbot">
+        <i class="ri-chat-4-line"></i>
+    </button>
+
+    <a href="https://wa.me/522222930938?text=Hola,%20me%20interesa%20automatizar%20mi%20negocio" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
         <i class="ri-whatsapp-line"></i>
     </a>
 
@@ -873,6 +1007,26 @@
             VanillaTilt.init(document.querySelectorAll(".card"), { max: 25, speed: 400, glare: true, "max-glare": 0.5 });
 
 
+            // --- LÓGICA: MENÚ HAMBURGUESA ---
+            const menuToggleBtn = document.getElementById('menu-toggle-btn');
+            const mainNav = document.getElementById('main-nav');
+            const navLinks = mainNav.querySelectorAll('a');
+
+            if (menuToggleBtn) { 
+                menuToggleBtn.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                });
+
+                // Cerrar menú al hacer click en un enlace
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (window.innerWidth <= 768) {
+                            mainNav.classList.remove('active');
+                        }
+                    });
+                });
+            }
+
             // --- 3. CALCULADORA DE AHORRO (MINUTOS) ---
             const inputTareas = document.getElementById('tareas');
             const inputTiempo = document.getElementById('tiempo');
@@ -882,7 +1036,7 @@
             function calculateAhorro() {
                 const tareasDiarias = parseFloat(inputTareas.value) || 0;
                 
-                // CRÍTICO: Input en MINUTOS -> Convertir a SEGUNDOS
+                // Input en MINUTOS -> Convertir a SEGUNDOS
                 const tiempoPorTareaMinutos = parseFloat(inputTiempo.value) || 0;
                 const tiempoPorTareaSegundos = tiempoPorTareaMinutos * 60; 
                 
@@ -932,12 +1086,136 @@
                     }, 3000);
                 }, 1500);
             });
+            
+            // --- 5. LÓGICA DEL CHATBOT CON SIMULACIÓN DE RESPUESTA ---
+            const openChatBtn = document.getElementById('open-chat-btn');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+            const chatWidget = document.getElementById('chat-widget-container');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInputField = document.getElementById('chat-input-field');
+            const sendChatBtn = document.getElementById('send-chat-btn');
+
+            function toggleChat() {
+                chatWidget.classList.toggle('open');
+                const icon = openChatBtn.querySelector('i');
+                if (chatWidget.classList.contains('open')) {
+                    icon.classList.remove('ri-chat-4-line');
+                    icon.classList.add('ri-close-line');
+                    openChatBtn.style.animation = 'none';
+                    chatInputField.focus(); 
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-chat-4-line');
+                    openChatBtn.style.animation = 'chat-bounce 3s infinite';
+                }
+            }
+            
+            function addMessage(text, isUser = false, isTyping = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user-message' : 'bot-response'}`;
+                
+                if (isTyping) {
+                    messageDiv.id = 'typing-indicator';
+                    messageDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+                } else {
+                    // Usamos innerHTML para permitir texto enriquecido (ej. negritas)
+                    messageDiv.innerHTML = text; 
+                }
+                
+                chatMessages.appendChild(messageDiv);
+                // Scroll al final
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return messageDiv;
+            }
+
+            function removeTypingIndicator() {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+
+            async function handleSendMessage() {
+                const userMessage = chatInputField.value.trim();
+                if (userMessage === '') return;
+
+                // 1. Mostrar el mensaje del usuario
+                addMessage(userMessage, true);
+                chatInputField.value = '';
+
+                // 2. Mostrar el indicador de 'escribiendo' del bot
+                addMessage('', false, true);
+                
+                // Deshabilitar la entrada mientras el bot "escribe"
+                chatInputField.disabled = true;
+                sendChatBtn.disabled = true;
+                sendChatBtn.style.opacity = '0.5';
 
 
-            // --- 5. CURSOR Y GLOW ---
+                // --- PUNTO DE INTEGRACIÓN CRÍTICO ---
+                const webhookUrlN8N = 'https://su.webhook.n8n/produccion'; // <--- REEMPLAZA ESTA URL CON TU WEBHOOK DE N8N REAL
+
+                try {
+                    // **AQUÍ SE HARÍA LA LLAMADA REAL A N8N O AL PROXY DE OPENAI/GEMINI**
+                    
+                    /* // EJEMPLO DE CÓDIGO REAL USANDO FETCH (Requiere un backend seguro)
+                    const response = await fetch(webhookUrlN8N, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: userMessage })
+                    });
+                    const data = await response.json();
+                    const botResponse = data.response; 
+                    */
+
+                    // SIMULACIÓN DE RESPUESTA
+                    await new Promise(resolve => setTimeout(resolve, 1500)); // Simula latencia de red/procesamiento
+                    let botResponse = `Entendido. Usted preguntó: "${userMessage}". En un flujo real, usaría **n8n** (o un proxy) para llamar a OpenAI y generar una respuesta inteligente.`;
+                    
+                    // Respuestas simuladas basadas en palabras clave:
+                    const msg = userMessage.toLowerCase();
+                    if (msg.includes('costo') || msg.includes('precio') || msg.includes('cuanto')) {
+                        botResponse = 'Nuestros proyectos inician desde **$5,000 MXN**, dependiendo de la complejidad de la integración y los sistemas a conectar. ¿Desea una cotización personalizada?';
+                    } else if (msg.includes('hola') || msg.includes('saludo')) {
+                        botResponse = '¡Hola! Me alegra que me escribas. Soy el asistente de AutomateLabMx. ¿Qué proceso quieres automatizar hoy?';
+                    } else if (msg.includes('n8n')) {
+                        botResponse = '¡Excelente pregunta! **n8n** es nuestra herramienta favorita. Podemos conectar tu CRM, WhatsApp y la IA en un solo flujo. ¿Qué sistemas te gustaría integrar?';
+                    }
+                    
+                    // 3. Eliminar el indicador y mostrar la respuesta real
+                    removeTypingIndicator();
+                    addMessage(botResponse, false);
+
+                } catch (error) {
+                    console.error('Error al conectar con el backend:', error);
+                    removeTypingIndicator();
+                    addMessage('Lo siento, el servicio de chat está temporalmente fuera de línea. Por favor, use nuestro formulario de contacto.', false);
+                } finally {
+                    // Volver a habilitar la entrada
+                    chatInputField.disabled = false;
+                    sendChatBtn.disabled = false;
+                    sendChatBtn.style.opacity = '1';
+                    chatInputField.focus();
+                }
+            }
+            
+            // Eventos para enviar con botón y con la tecla Enter
+            sendChatBtn.addEventListener('click', handleSendMessage);
+            chatInputField.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSendMessage();
+                }
+            });
+
+            openChatBtn.addEventListener('click', toggleChat);
+            closeChatBtn.addEventListener('click', toggleChat);
+
+
+            // --- 6. CURSOR Y GLOW ---
             const cursorDot = document.querySelector(".cursor-dot");
             const cursorCircle = document.querySelector(".cursor-circle");
-            const interactives = document.querySelectorAll('a, button, .card, .btn-neon, .whatsapp-float, .value-card, .form-btn'); 
+            const interactives = document.querySelectorAll('a, button, .card, .btn-neon, .whatsapp-float, .chatbot-float, .value-card, .form-btn, .btn-cta-pulse'); 
 
             if (window.innerWidth > 768) { 
                 window.addEventListener('mousemove', function(e) {
@@ -973,423 +1251,6 @@
             });
 
         });
-        
     </script>
-    <!-- Widget de Chatbot - Agregar antes de </body> -->
-<style>
-  #chatbot-widget {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    z-index: 9999;
-  }
-  
-  #chat-button {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #00D9FF 0%, #A855F7 100%);
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s;
-  }
-  
-  #chat-button:hover {
-    transform: scale(1.1);
-  }
-  
-  #chat-button svg {
-    width: 30px;
-    height: 30px;
-    fill: white;
-  }
-  
-  #chat-container {
-    display: none;
-    position: fixed;
-    bottom: 170px;
-    right: 20px;
-    width: 380px;
-    height: 400px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    flex-direction: column;
-    overflow: hidden;
-  }
-  
-  #chat-container.open {
-    display: flex;
-  }
-  
-  #chat-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: black;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  #chat-header h3 {
-    margin: 0;
-    font-size: 18px;
-    color: white;
-    font-weight: 600;
-  }
-  }
-  
-  #close-chat {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-  }
-  
-  #chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    background: #f5f5f5;
-  }
-  
-  .message {
-    margin-bottom: 16px;
-    display: flex;
-    align-items: flex-start;
-  }
-  
-  .message.bot {
-    justify-content: flex-start;
-  }
-  
-  .message.user {
-    justify-content: flex-end;
-  }
-  
-  .message-content {
-    max-width: 75%;
-    padding: 12px 16px;
-    border-radius: 16px;
-    word-wrap: break-word;
-  }
-  
-  .message.bot .message-content {
-    background: white;
-    color: #333;
-    border-bottom-left-radius: 4px;
-  }
-  
-  .message.user .message-content {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-bottom-right-radius: 4px;
-  }
-  
-  #chat-input-area {
-    padding: 16px;
-    background: white;
-    border-top: 1px solid #e0e0e0;
-  }
-  
-  #chat-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 24px;
-    font-size: 14px;
-    outline: none;
-    resize: none;
-    font-family: inherit;
-  }
-  
-  #send-button {
-    margin-top: 8px;
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 24px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-  }
-  
-  #send-button:hover {
-    opacity: 0.9;
-  }
-  
-  #send-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    padding: 12px 16px;
-    background: white;
-    border-radius: 16px;
-    width: fit-content;
-  }
-  
-  .typing-indicator span {
-    width: 8px;
-    height: 8px;
-    background: #999;
-    border-radius: 50%;
-    animation: typing 1.4s infinite;
-  }
-  
-  .typing-indicator span:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-  
-  .typing-indicator span:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-  @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-  }
-  
-  @keyframes typing {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-10px); }
-  }
-  
-#lead-form {
-  padding: 20px;
-  background: white;
-}
-
-#lead-form h4 {
-  margin-top: 0;
-  margin-bottom: 16px;
-  color: #667eea;
-  font-size: 18px;
-  font-weight: 600;
-  text-align: center;
-}
-
-#lead-form input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  box-sizing: border-box;
-  color: #333;
-  background: white;
-}
-
-#lead-form input::placeholder {
-  color: #999;
-}
-
-#lead-form button {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-#lead-form button:hover {
-  opacity: 0.9;
-}
-  }
-</style>
-
-<div id="chatbot-widget">
-  <button id="chat-button" aria-label="Abrir chat">
-    <svg viewBox="0 0 24 24">
-      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-    </svg>
-  </button>
-  
-  <div id="chat-container">
-    <div id="chat-header">
-      <h3>AutomateLabMx</h3>
-      <button id="close-chat" aria-label="Cerrar chat">×</button>
-    </div>
-    
-    <div id="lead-form" style="display: none;">
-      <h4 style="margin-top: 0;">Déjanos tus datos</h4>
-      <input type="text" id="lead-name" placeholder="Nombre" required>
-      <input type="email" id="lead-email" placeholder="Email" required>
-      <input type="tel" id="lead-phone" placeholder="Teléfono" required>
-      <button id="start-chat-btn">Iniciar Chat</button>
-    </div>
-    
-    <div id="chat-messages"></div>
-    
-    <div id="chat-input-area">
-      <textarea id="chat-input" placeholder="Escribe tu mensaje..." rows="1"></textarea>
-      <button id="send-button">Enviar</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  // CONFIGURACIÓN - CAMBIA ESTA URL POR TU WEBHOOK DE N8N
-  const N8N_WEBHOOK_REAL = 'https://automatizacionesrc.app.n8n.cloud/webhook/ChatbotAutoamteLabMx';
-  const N8N_WEBHOOK_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(N8N_WEBHOOK_REAL);
-  
-  const chatButton = document.getElementById('chat-button');
-  const chatContainer = document.getElementById('chat-container');
-  const closeChat = document.getElementById('close-chat');
-  const chatMessages = document.getElementById('chat-messages');
-  const chatInput = document.getElementById('chat-input');
-  const sendButton = document.getElementById('send-button');
-  const leadForm = document.getElementById('lead-form');
-  const startChatBtn = document.getElementById('start-chat-btn');
-  const chatInputArea = document.getElementById('chat-input-area');
-  
-  let conversationHistory = [];
-  let leadData = null;
-  let sessionId = Date.now().toString();
-  
-  // Abrir/cerrar chat
-  chatButton.addEventListener('click', () => {
-    chatContainer.classList.add('open');
-    if (!leadData) {
-      leadForm.style.display = 'block';
-      chatMessages.style.display = 'none';
-      chatInputArea.style.display = 'none';
-    }
-  });
-  
-  closeChat.addEventListener('click', () => {
-    chatContainer.classList.remove('open');
-  });
-  
-  // Iniciar chat después del formulario
-  startChatBtn.addEventListener('click', async () => {
-    const name = document.getElementById('lead-name').value.trim();
-    const email = document.getElementById('lead-email').value.trim();
-    const phone = document.getElementById('lead-phone').value.trim();
-    
-    if (!name || !email || !phone) {
-      alert('Por favor completa todos los campos');
-      return;
-    }
-    
-    leadData = { name, email, phone };
-    
-    leadForm.style.display = 'none';
-    chatMessages.style.display = 'block';
-    chatInputArea.style.display = 'block';
-    
-    addMessage('bot', `¡Hola ${name}! 👋 Soy el asistente virtual de AutomateLabMx. ¿En qué puedo ayudarte hoy?`);
-  });
-  
-  // Enviar mensaje
-  sendButton.addEventListener('click', sendMessage);
-  chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
-  
-  async function sendMessage() {
-    const message = chatInput.value.trim();
-    if (!message) return;
-    
-    addMessage('user', message);
-    chatInput.value = '';
-    
-    conversationHistory.push({
-      role: 'user',
-      content: message
-    });
-    
-    showTypingIndicator();
-    
-    try {
-      const response = await fetch(N8N_WEBHOOK_URL, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: message,
-          leadData: leadData,
-          conversationHistory: conversationHistory,
-          sessionId: sessionId
-        })
-      });
-      
-      const data = await response.json();
-      
-      removeTypingIndicator();
-      
-      if (data.reply) {
-        addMessage('bot', data.reply);
-        conversationHistory.push({
-          role: 'assistant',
-          content: data.reply
-        });
-      }
-    } catch (error) {
-      removeTypingIndicator();
-      addMessage('bot', 'Lo siento, hubo un error. Por favor intenta de nuevo.');
-      console.error('Error:', error);
-    }
-  }
-  
-  function addMessage(sender, text) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${sender}`;
-    
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'message-content';
-    contentDiv.textContent = text;
-    
-    messageDiv.appendChild(contentDiv);
-    chatMessages.appendChild(messageDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-  
-  function showTypingIndicator() {
-    const indicator = document.createElement('div');
-    indicator.className = 'message bot';
-    indicator.id = 'typing-indicator';
-    
-    const typingDiv = document.createElement('div');
-    typingDiv.className = 'typing-indicator';
-    typingDiv.innerHTML = '<span></span><span></span><span></span>';
-    
-    indicator.appendChild(typingDiv);
-    chatMessages.appendChild(indicator);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-  
-  function removeTypingIndicator() {
-    const indicator = document.getElementById('typing-indicator');
-    if (indicator) {
-      indicator.remove();
-    }
-  }
-</script>
 </body>
 </html>
