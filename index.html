@@ -229,26 +229,34 @@
             text-shadow: none;
         }
 
-        /* Imagen 2D */
         .hero-image-2d {
-            position: absolute; 
-            right: 0; 
-            top: 0; 
-            width: 50%; 
-            height: 100%; 
-            z-index: 1;
-            overflow: hidden; 
-            display: flex; 
-            align-items: center; 
-            justify-content: flex-end;
-            pointer-events: auto; /* Cambiado para permitir interacción */
-          }
-          
-          .hero-image-2d spline-viewer {
-            width: 100%;
-            height: 100%;
-            border: none;
-          }
+          position: absolute; 
+          right: 0; 
+          top: 0; 
+          width: 50%; 
+          height: 100%; 
+          z-index: 1;
+          overflow: hidden; 
+          display: flex; 
+          align-items: center; 
+          justify-content: flex-end;
+          pointer-events: auto;
+          /* Mezclar con el fondo de la página */
+          mix-blend-mode: screen; /* o 'lighten', 'overlay', 'soft-light' */
+        }
+        
+        .hero-image-2d spline-viewer {
+          width: 100%;
+          height: 100%;
+          border: none;
+          background: transparent !important;
+          /* Forzar transparencia */
+          opacity: 0.95;
+        }
+        
+        /* Canvas de Spline transparente */
+        .hero-image-2d spline-viewer canvas {
+          background: transparent !important;
         }
 
         /* --- CINTA DE TECNOLOGÍAS (MARQUEE) --- */
